@@ -1,3 +1,5 @@
+# Telegram_grabber
+
 ### Install package
 1. git clone https://github.com/michailz/Telegram_grabber.git
 2. Install docker and docker-compose

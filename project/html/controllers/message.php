@@ -13,13 +13,13 @@ Class Controller_Message Extends Controller_Base {
     if(!empty($this->registry->args[0])) {
       $db = $this->registry->get('db');
       $pstring = $this->registry->args[0];
-      $string = base64_decode($pstring);
+      $string = base64_decode(str_replace('_', '/',$pstring));
       $arr = json_decode($string, true);
       $current = ($arr['page']);
       $pagination = array();
       for($i=1; $i <= intval($arr['pages']); $i++) {
         $arr['page'] = $i;
-        $pagination[] = base64_encode(json_encode($arr, JSON_UNESCAPED_UNICODE));
+        $pagination[] = str_replace('/', '_', base64_encode(json_encode($arr, JSON_UNESCAPED_UNICODE)));
       }
       if (!empty($arr['term'])) {
       $q = $db->prepare("SELECT m.id, m.message_id, m.channel_id, c.title, m.text,

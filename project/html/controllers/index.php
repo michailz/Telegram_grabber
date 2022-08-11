@@ -29,7 +29,7 @@ Class Controller_Index Extends Controller_Base {
       $arr['term'] = $message;
       $arr['pages'] = $pages + 1;
       $arr['page'] = 1;
-      header('Location: /message/show/' . base64_encode(json_encode($arr, JSON_UNESCAPED_UNICODE)));
+      header('Location: /message/show/' . str_replace('/', '_', base64_encode(json_encode($arr, JSON_UNESCAPED_UNICODE))));
     }
 
   }
@@ -54,7 +54,7 @@ Class Controller_Index Extends Controller_Base {
         $arr['channel'] = $channel_id;
         $arr['pages'] = $pages + 1;
         $arr['page'] = 1;
-        $url = '/message/show/' . base64_encode(json_encode($arr, JSON_UNESCAPED_UNICODE));
+        $url = '/message/show/' . str_replace('/', '_', base64_encode(json_encode($arr, JSON_UNESCAPED_UNICODE)));
         $this->registry['template']->set('title', 'Telegram parser');
         $this->registry['template']->set('url', $url);
         $this->registry['template']->set('channels', $channels);
@@ -82,7 +82,7 @@ Class Controller_Index Extends Controller_Base {
     $arr['user'] = $user_id;
     $arr['pages'] = $pages + 1;
     $arr['page'] = 1;
-    $url = '/message/show/' . base64_encode(json_encode($arr, JSON_UNESCAPED_UNICODE));
+    $url = '/message/show/' . str_replace('/', '_', base64_encode(json_encode($arr, JSON_UNESCAPED_UNICODE)));
     $this->registry['template']->set('title', 'Telegram parser');
     $this->registry['template']->set('url', $url);
     $this->registry['template']->set('users', $users);
