@@ -1,0 +1,9 @@
+[Telegram]
+api_id = 00000001
+api_hash = 0000000000000000000000000000000
+username = "Your name"
+[Postgres]
+host = '127.0.0.1'
+dbname = telegram
+user = postgres
+password = root

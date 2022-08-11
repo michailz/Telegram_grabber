@@ -1,0 +1,6 @@
+*.session
+config.ini
+media/
+postgres-data
+telegram_env/
+.idea/
