@@ -7,6 +7,7 @@ from pathlib import Path
 import psycopg2
 from telethon.errors.rpcerrorlist import ChannelPrivateError
 from telethon.errors.rpcerrorlist import MsgIdInvalidError
+from telethon.errors.rpcerrorlist import FileReferenceExpiredError
 from telethon.sync import TelegramClient
 from telethon.tl.functions.channels import GetFullChannelRequest
 from telethon.tl.types import PeerUser
@@ -111,16 +112,21 @@ async def main(channel_id, media_directory, min_id):
                     VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
                     ON CONFLICT DO NOTHING""",
                                 (message_id, channel_id, action, text, sender_name, sender_id, sender_type, reply_id,
-                                 forward_id, forward_name, filename, file_extension, filehash_sha1, create_date, edit_date))
+                                 forward_id, forward_name, filename, file_extension, filehash_sha1, create_date,
+                                 edit_date))
                     if i >= 50:
                         i = 0
                         conn.commit()
+                except FileReferenceExpiredError:
+                    conn.commit()
+                    print("Oops!", sys.exc_info()[0], sys.exc_info()[1], "occurred.")
 
                 except MsgIdInvalidError:
                     conn.commit()
                     print("Oops!", sys.exc_info()[0], sys.exc_info()[1], "occurred.")
                     print(message)
                     raise
+
             conn.commit()
     except ChannelPrivateError:
         print('Channel is private')
@@ -133,6 +139,7 @@ async def main(channel_id, media_directory, min_id):
     except Exception:
         print("Oops!", sys.exc_info()[0], sys.exc_info()[1], "occurred.")
         raise
+
 
 """
 0. Create directory media if not exists

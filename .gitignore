@@ -1,4 +1,5 @@
 *.session
+*.session-journal
 config.ini
 media/
 postgres-data
