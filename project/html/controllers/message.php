@@ -13,6 +13,7 @@ Class Controller_Message Extends Controller_Base {
     if(!empty($this->registry->args[0])) {
       $db = $this->registry->get('db');
       $pstring = $this->registry->args[0];
+      $pstring = str_replace(' ', '+', $pstring);
       $string = base64_decode(str_replace('_', '/',$pstring));
       $arr = json_decode($string, true);
       $current = ($arr['page']);

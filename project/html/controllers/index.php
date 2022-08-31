@@ -18,6 +18,8 @@ Class Controller_Index Extends Controller_Base {
       $message = str_replace('|&', '|', $message);
       $message = str_replace('&|', '|', $message);
       $message = preg_replace("/(\|)\\1+/", "$1", $message);
+      $message = trim($message, '&');
+      $message = trim($message, '|');
       $db = $this->registry->get('db');
 
       $q = $db->prepare("SELECT count(*) c FROM messages where ts @@ to_tsquery('russian', ?)");
