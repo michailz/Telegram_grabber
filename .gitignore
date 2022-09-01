@@ -1,6 +1,6 @@
 *.session
 *.session-journal
-config.ini
+*.ini
 media/
 postgres-data
 telegram_env/
