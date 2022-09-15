@@ -56,9 +56,6 @@ include('templates/header.php');?>
           </form>
         </div>
         <div class="box">
-          <p>Deleting of channels is not implemented yet. Use Adminer on http://localhost:8080/ <br>
-            System: PostgreSQL; Server: postgres; Username: postgres; Password: root; Database: telegram.<br>
-            Delete your channel from orders (channel) and from channels (order_channel)
         </div>
       </div>
     </div>

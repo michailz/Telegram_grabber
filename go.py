@@ -144,7 +144,7 @@ async def main(channel_id, media_directory, min_id):
 """
 0. Create directory media if not exists
 """
-media_directory = os.path.join(config_path, 'media')
+media_directory = os.path.join(config_path, 'project', 'html', 'media')
 try:
     os.makedirs(media_directory)
 except FileExistsError:

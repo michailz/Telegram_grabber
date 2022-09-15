@@ -42,11 +42,10 @@ Class Controller_Index Extends Controller_Base {
       $db = $this->registry->get('db');
       $channel_id = intval($this->registry->args[0]);
         $q = $db->prepare("
-            SELECT c.channel_id, c.title, c.date, c.username, count(*) cnt FROM channels c
-            LEFT JOIN messages m ON c.channel_id = m.channel_id
-            WHERE order_channel IN (SELECT order_channel FROM channels
-            WHERE channel_id = ? AND m.action IS NULL )
-            GROUP BY c.channel_id, c.title, c.date, c.username;");
+          SELECT c.channel_id, c.title, c.date, c.username, count(*) cnt FROM channels c
+          LEFT JOIN messages m ON c.channel_id = m.channel_id
+          WHERE c.channel_id = ? AND m.action IS NULL
+          GROUP BY c.channel_id, c.title, c.date, c.username;");
         $q->bindParam(1, $channel_id, PDO::PARAM_INT);
         $q->execute();
         $channels = $q->fetchAll();
