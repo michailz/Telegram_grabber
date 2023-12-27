@@ -37,14 +37,3 @@ services:
        - overlay
     ports:
       - "8080:8080"
-
-  datascience-notebook:
-    image: jupyter/datascience-notebook
-    restart: always
-    volumes:
-      - ./jupyter:/home/jovyan/work
-    networks:
-      - overlay
-    ports:
-      - 8888:8888
-    container_name: datascience-notebook-container
