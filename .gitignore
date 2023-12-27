@@ -5,3 +5,5 @@ media/
 postgres-data
 telegram_env/
 .idea/
+telegram_env/
+jupyter/
