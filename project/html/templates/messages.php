@@ -28,7 +28,34 @@ include('header.php');?>
                       <?php endif;?>
                         <td class="wrap">
                           <?=empty($message['text'])?"":html_entity_decode($message['text'])?>
-                          <?=empty($message['filename'])?"":'<br>File: '.$message['filename'].$message['file_extension'].' sha1: '.$message['filehash_sha1'];?>
+                          <?php if (!empty($message['filename'])):?>
+                            <?php if (!empty($message['file_extension']) and (in_array($message['file_extension'], array('.jpg', '.jpeg', '.png', '.gif', '.webp')))):?>
+                              <br><img src='/media/extension_<?=ltrim($message['file_extension'], '.')?>/<?=$message['filehash_sha1'].$message['file_extension']?>' alt='<?=$message['filename'].$message['file_extension']?>'>
+                            <?php endif?>
+                            <?php if (!empty($message['file_extension']) and (in_array($message['file_extension'], array('.m4a', '.mp3', '.oga', '.ogg', '.opus', '.wav')))):?>
+                              <figure>
+                                <figcaption>Listen to <?=$message['filename'] . '<br>Saved as: /media/extension_' . ltrim($message['file_extension'], '.') . '/' .  $message['filehash_sha1'].$message['file_extension']?>:</figcaption>
+                                <audio controls>
+                                <source src="/media/extension_<?=ltrim($message['file_extension'], '.')?>/<?=$message['filehash_sha1'].$message['file_extension']?>"
+                                type="audio/mpeg">
+                                        Your browser does not support the <code>audio</code> element.
+                                </audio>
+                              </figure>
+                            <?php endif?>
+                            <?php if (!empty($message['file_extension']) and (in_array($message['file_extension'], array('.m4v', '.mkv', '.mov', '.mp4', '.webm')))):?>
+                              <figure>
+                                <figcaption>
+                                  Listen to <?=$message['filename'] . '<br>Saved as: /media/extension_' . ltrim($message['file_extension'], '.') . '/' .  $message['filehash_sha1'].$message['file_extension']?>:
+                                </figcaption>
+                                <video width="320" height="240" controls>
+                                  <source src="/media/extension_<?=ltrim($message['file_extension'], '.')?>/<?=$message['filehash_sha1'].$message['file_extension']?>">
+                                    Your browser does not support the video tag.
+                                </video>
+                              </figure>
+                            <?php endif?>
+                            <br>
+                            <a href="/media/extension_<?=ltrim($message['file_extension'], '.')?>/<?=$message['filehash_sha1'].$message['file_extension']?>" download>Download <?=$message['filename'].$message['file_extension']?></a>
+                          <?php endif?>
                         </td>
                     </tr>
                   <?php endforeach; ?>

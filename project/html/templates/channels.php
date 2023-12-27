@@ -6,7 +6,7 @@ include('templates/header.php');?>
     <div class="columns">
       <div class="column">
         <div class="box">
-          <h2 class="title">Channel + related channel(s)</h2>
+          <h2 class="title">Channel</h2>
           <table class="table is-bordered">
             <thead>
               <tr>
